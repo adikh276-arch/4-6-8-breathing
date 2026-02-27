@@ -98,12 +98,12 @@ const ActiveBreathing = () => {
   };
 
   // Circle scale based on phase
-  const getCircleScale = () => {
-    if (status === "idle") return "scale-[0.6]";
-    if (phase === "inhale") return "scale-100";
-    if (phase === "hold") return "scale-100";
-    if (phase === "exhale") return "scale-[0.6]";
-    return "scale-[0.6]";
+  const getCircleScale = (): number => {
+    if (status === "idle") return 0.6;
+    if (phase === "inhale") return 1;
+    if (phase === "hold") return 1;
+    if (phase === "exhale") return 0.6;
+    return 0.6;
   };
 
   // Build countdown text
@@ -115,13 +115,13 @@ const ActiveBreathing = () => {
     return `${PHASE_LABELS[phase]}… ${nums}`;
   };
 
-  // Dynamic transition duration based on phase
-  const getTransitionDuration = () => {
-    if (status !== "running") return "duration-500";
-    if (phase === "inhale") return "duration-[4000ms]";
-    if (phase === "hold") return "duration-300";
-    if (phase === "exhale") return "duration-[8000ms]";
-    return "duration-500";
+  // Dynamic transition duration based on phase (in ms)
+  const getTransitionMs = (): number => {
+    if (status !== "running") return 500;
+    if (phase === "inhale") return 4000;
+    if (phase === "hold") return 300;
+    if (phase === "exhale") return 8000;
+    return 500;
   };
 
   return (
