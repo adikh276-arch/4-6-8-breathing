@@ -130,7 +130,11 @@ const ActiveBreathing = () => {
         {/* Breathing Circle */}
         <div className="relative flex items-center justify-center" style={{ width: 220, height: 220 }}>
           <div
-            className={`w-full h-full rounded-full gradient-circle glow-circle flex items-center justify-center transition-transform ease-in-out ${getTransitionDuration()} ${getCircleScale()}`}
+            className="w-full h-full rounded-full gradient-circle glow-circle flex items-center justify-center ease-in-out"
+            style={{
+              transform: `scale(${getCircleScale()})`,
+              transition: `transform ${getTransitionMs()}ms ease-in-out`,
+            }}
           >
             <p
               key={`${phase}-${countdown}`}
