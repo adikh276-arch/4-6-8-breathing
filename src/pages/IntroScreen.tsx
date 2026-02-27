@@ -5,7 +5,7 @@ const IntroScreen = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center px-6 py-12 animate-fade-in">
-      <div className="max-w-md w-full flex flex-col items-center text-center gap-6">
+      <div className="max-w-sm w-full flex flex-col items-center text-center gap-6 px-2">
         <h1 className="font-display text-4xl font-bold text-foreground leading-tight">
           4-6-8 Breathing Exercise
         </h1>

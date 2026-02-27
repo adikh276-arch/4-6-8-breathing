@@ -126,9 +126,9 @@ const ActiveBreathing = () => {
 
   return (
     <div className="min-h-screen gradient-bg-screen flex flex-col items-center justify-center px-6 py-8 animate-fade-in">
-      <div className="max-w-md w-full flex flex-col items-center gap-6">
+      <div className="max-w-sm w-full flex flex-col items-center gap-5 px-2">
         {/* Breathing Circle */}
-        <div className="relative flex items-center justify-center" style={{ width: 260, height: 260 }}>
+        <div className="relative flex items-center justify-center" style={{ width: 220, height: 220 }}>
           <div
             className={`w-full h-full rounded-full gradient-circle glow-circle flex items-center justify-center transition-transform ease-in-out ${getTransitionDuration()} ${getCircleScale()}`}
           >
