@@ -15,7 +15,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter basename="/4_6_8_breathing">
         <Routes>
           <Route path="/" element={<IntroScreen />} />
           <Route path="/breathe" element={<ActiveBreathing />} />
