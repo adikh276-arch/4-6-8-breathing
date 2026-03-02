@@ -7,6 +7,7 @@ import IntroScreen from "./pages/IntroScreen";
 import ActiveBreathing from "./pages/ActiveBreathing";
 import CompletionScreen from "./pages/CompletionScreen";
 import NotFound from "./pages/NotFound";
+import { LanguageSwitcher } from "./components/LanguageSwitcher";
 
 const queryClient = new QueryClient();
 
@@ -15,6 +16,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <LanguageSwitcher />
       <BrowserRouter basename="/4_6_8_breathing">
         <Routes>
           <Route path="/" element={<IntroScreen />} />

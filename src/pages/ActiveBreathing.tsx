@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { RotateCcw } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 type Phase = "inhale" | "hold" | "exhale";
 type Status = "idle" | "running" | "paused";
@@ -11,16 +12,11 @@ const PHASE_DURATIONS: Record<Phase, number> = {
   exhale: 8,
 };
 
-const PHASE_LABELS: Record<Phase, string> = {
-  inhale: "Inhale",
-  hold: "Hold",
-  exhale: "Exhale",
-};
-
 const PHASE_ORDER: Phase[] = ["inhale", "hold", "exhale"];
 
 const ActiveBreathing = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [status, setStatus] = useState<Status>("idle");
   const [totalRounds, setTotalRounds] = useState(4);
   const [currentRound, setCurrentRound] = useState(1);
@@ -108,11 +104,11 @@ const ActiveBreathing = () => {
 
   // Build countdown text
   const getCountdownText = () => {
-    if (status === "idle") return "Ready";
+    if (status === "idle") return t('ready');
     const phaseDuration = PHASE_DURATIONS[phase];
     const elapsed = phaseDuration - countdown + 1;
     const nums = Array.from({ length: Math.min(elapsed, phaseDuration) }, (_, i) => i + 1).join("…");
-    return `${PHASE_LABELS[phase]}… ${nums}`;
+    return `${t(phase)}… ${nums}`;
   };
 
   // Dynamic transition duration based on phase (in ms)
@@ -147,11 +143,11 @@ const ActiveBreathing = () => {
 
         {/* Info text */}
         <p className="text-foreground/80 font-subtitle text-sm text-center">
-          Complete {totalRounds} rounds to feel the shift.
+          {t('rounds_to_feel_shift', { count: totalRounds })}
         </p>
 
         <p className="text-foreground font-semibold text-lg">
-          Round {currentRound} of {totalRounds}
+          {t('round_x_of_y', { current: currentRound, total: totalRounds })}
         </p>
 
         {/* Round Selector */}
@@ -165,13 +161,12 @@ const ActiveBreathing = () => {
                   reset();
                 }
               }}
-              className={`px-5 py-2 rounded-full font-semibold text-sm transition-colors duration-200 ${
-                totalRounds === r
+              className={`px-5 py-2 rounded-full font-semibold text-sm transition-colors duration-200 ${totalRounds === r
                   ? "bg-primary text-primary-foreground glow-soft"
                   : "bg-card text-foreground hover:opacity-80"
-              }`}
+                }`}
             >
-              {r} rounds
+              {t('rounds_selector', { count: r })}
             </button>
           ))}
         </div>
@@ -182,19 +177,19 @@ const ActiveBreathing = () => {
             onClick={handleStart}
             className="px-8 py-3 bg-primary text-primary-foreground font-semibold rounded-full glow-soft hover:opacity-90 transition-opacity"
           >
-            {status === "paused" ? "Resume" : "Start"}
+            {status === "paused" ? t('resume') : t('start')}
           </button>
           <button
             onClick={handlePause}
             disabled={status !== "running"}
             className="px-8 py-3 bg-primary text-primary-foreground font-semibold rounded-full glow-soft hover:opacity-90 transition-opacity disabled:opacity-40"
           >
-            Pause
+            {t('pause')}
           </button>
           <button
             onClick={reset}
             className="p-3 bg-card text-foreground rounded-full hover:opacity-80 transition-opacity"
-            aria-label="Reset"
+            aria-label={t('reset')}
           >
             <RotateCcw size={20} />
           </button>
